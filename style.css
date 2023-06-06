@@ -49,9 +49,9 @@ img {
 .navbar {
   position: relative;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   /* justify-content: space-evenly; */
-  margin: 0 auto
+  /* margin: 0 auto */
   
   /* background-color:#6c757d; */
 }
@@ -62,8 +62,8 @@ img {
 }
 .navbar-brand {
   flex: none;
-  font-size: 20px;
-  padding: 0px 5;
+  font-size: 21px;
+  /* padding: 0px 5; */
 
 }
 .nav-link {
