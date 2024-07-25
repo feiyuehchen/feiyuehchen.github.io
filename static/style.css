@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'GenYoFontRegular';
-    src: url('static/font/GenYoMin2TW-R-01.ttf') format('truetype');
+    src: url('/static/font/GenYoMin2TW-R-01.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
