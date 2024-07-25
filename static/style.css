@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'GenKiMin2-R';
+    src: url('/static/font/GenKiMin2-R.ttc') format('ttc');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
+body {
+    font-family: 'GenKiMin2-R', sans-serif;
+}
