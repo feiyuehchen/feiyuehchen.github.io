@@ -4,8 +4,15 @@
     font-weight: normal;
     font-style: normal;
   }
+  @font-face {
+    font-family: 'YakuhanJPRegular';
+    src: url('/static/font/YakuHanJP-Regular.woff2') format('woff2'),
+    url('/static/font/YakuHanJP-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
 
 
 body {
-    font-family: 'GenYoFontRegular', sans-serif;
+    font-family: 'GenYoFontRegular', 'YakuhanJPRegular', sans-serif;
 }
