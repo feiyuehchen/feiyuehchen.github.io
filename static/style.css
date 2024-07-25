@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'GenKiMin2-R';
-    src: url('/static/font/GenKiMin2-R.ttc') format('ttc');
+    src: url('/static/font/GenKiMin2-R.ttc') format('truetype-collection');
     font-weight: normal;
     font-style: normal;
   }
