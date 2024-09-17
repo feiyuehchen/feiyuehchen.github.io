@@ -26,7 +26,7 @@
 
 </head>
 
-<body class="font" >
+<body class="font">
   <!-- nav bar start -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -71,17 +71,35 @@
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="static/img/carousel/000030870034.jpg" class="d-block main-img" alt="...">
+          <img src="static/img/carousel/S__117514351.jpg" class="d-block main-img" alt="...">
         </div>
       </div>
     </div>
   </div>
 
   <!-- carousal end -->
-
+  <br>
   <div class="container d-block introduction">
-    <h4 id="introduction_en"></h4>
+    <h4 id="">I am a master student from <a href=https://labsites.rochester.edu/air/index.html>AIR lab, Department of ECE</a>
+      and <a href=http://factslab.io> Facts.lab, Department of Linguistics</a> in the Univeristy of Rochester. 
+      I'm also a member in <a href="https://ccl-lab.github.io">CCL Lab, Department of Economics</a>, National Taiwan University.
+      I focus on applications of Large Language Models (LLMs), especially in Music and Social Science fields.
+      <br>
+      <br>
+      Before studying in U of Rochester, I was the research assistant in <a href="https://academiasinicanlplab.github.io">NLPSA</a> and 
+      <a href="https://twmusicai.github.io">Music AI Lab</a>, IIS, Academia Sinica, Taiwan. 
+      I received a bachlor degree in Economics (major) and Mathmatics (minor) from National Taiwan University.
+      <br>
+      <br>
+      I play music, take photos and write stories in my free time.
+    </h4>
     <h4 id="introduction_zh"></h4>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
 
 
@@ -97,7 +115,7 @@
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script>
-    fetch('data.json')
+    fetch('static/data/data.json')
         .then(response => response.json())
         .then(data => {
             document.getElementById('introduction_en').innerText = data.introduction_en;

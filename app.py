@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import os
 import pandas as pd
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=".")
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 @app.route('/', methods=['GET', 'POST'])
