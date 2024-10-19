@@ -1,3 +1,10 @@
+:root {
+  /* 初始化高度和寬度為 CSS 變數，這些會被 JS 動態修改 */
+  --pdf-frame-width: 100%;
+  --pdf-frame-height:1000px;
+
+}
+
 @font-face {
     font-family: 'GenYoFontRegular';
     src: url('/static/font/GenYoMin2TW-R-01.ttf') format('truetype');
@@ -25,6 +32,11 @@ body {
 }
 
 .introduction{
-  width: 80%;
-  margin-left: 10%;
+}
+
+
+
+.pdf-frame {
+  height: var(--pdf-frame-height); /* 使用 CSS 變數來設置高度 */
+  width: var(--pdf-frame-width);   /* 使用 CSS 變數來設置寬度 */
 }

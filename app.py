@@ -20,5 +20,12 @@ def index():
             return render_template('index.html', tables=[data.to_html(classes='data')], titles=data.columns.values)
     return render_template('index.html')
 
+@app.route('/cv.html', methods=['GET'])
+def show_cv():
+    return render_template('cv.html')
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5678)
