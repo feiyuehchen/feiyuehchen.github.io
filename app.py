@@ -24,6 +24,10 @@ def index():
 def show_cv():
     return render_template('cv.html')
 
+@app.route('/project.html', methods=['GET'])
+def show_project():
+    return render_template('project.html')
+
 
 
 
