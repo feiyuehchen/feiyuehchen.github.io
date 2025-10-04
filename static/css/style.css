@@ -19,7 +19,7 @@
 }
 
 @font-face {
-    font-family: 'Redhat';
+    font-family: 'Redhat';f
     src: url('/static/font/redhat-medium.woff2') format('woff2'),
         url('/static/font/redhat-medium.woff') format('woff');
     font-weight: normal;
@@ -31,6 +31,8 @@ body {
     /* font-family: 'Redhat';
     background-color: var(--primary); */
     background-color: var(--transition-opacity);
+    font-family: 'YakuhanJPRegular', sans-serif;
+
 }
 
 
@@ -40,7 +42,6 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: 'YakuhanJPRegular', sans-serif;
   background-image: url('/static/img/home_3.png');
   background-size: cover;
   background-position: center;

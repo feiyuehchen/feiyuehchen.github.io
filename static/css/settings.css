@@ -134,7 +134,7 @@ table {
 }
 
 body {
-    font-size: calc(100vw / 1920 * 10);
+    /* font-size: calc(100vw / 1920 * 10); */
 }
 
 @media screen and (max-width: 768px) {
