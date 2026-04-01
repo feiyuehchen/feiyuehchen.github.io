@@ -1,0 +1,23 @@
+---
+interface Props {
+  opacity?: number;
+}
+const { opacity = 0.06 } = Astro.props;
+---
+
+<div class="dot-grid" style={`opacity: ${opacity}`} aria-hidden="true"></div>
+
+<style>
+.dot-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--color-jade-dim) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+}
+</style>

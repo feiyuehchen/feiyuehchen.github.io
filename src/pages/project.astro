@@ -1,0 +1,38 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import VerticalTabSection from '../components/project/VerticalTabSection.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((p) => ({
+    title:      p.data.title,
+    titleZh:    p.data.titleZh,
+    number:     p.data.number,
+    caption:    p.data.caption,
+    captionZh:  p.data.captionZh,
+    image:      p.data.image,
+    imageAlt:   p.data.imageAlt,
+    href:       p.data.href,
+  }));
+---
+
+<PageLayout
+  title="Projects · 作品"
+  description="Interactive art systems, music AI, and exhibition projects by Fei-Yueh Chen."
+  current="/project"
+  fullscreen={true}
+>
+  <VerticalTabSection items={projects} />
+</PageLayout>
+
+<style is:global>
+  /* Push tab-app below the fixed site nav */
+  .tab-app {
+    padding-top: 4rem;
+    height: 100vh;
+  }
+  .section {
+    height: 100vh;
+  }
+</style>

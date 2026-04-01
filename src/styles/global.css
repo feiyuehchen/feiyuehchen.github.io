@@ -1,0 +1,341 @@
+/* ─────────────────────────────────────────────
+   Tailwind Directives
+───────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────
+   Font Faces
+───────────────────────────────────────────── */
+@font-face {
+  font-family: 'GenYoMin2TW';
+  src: url('/fonts/GenYoMin2TW-R-01.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TaipeiSansTC';
+  src: url('/fonts/TaipeiSansTCBeta-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TaipeiSansTC';
+  src: url('/fonts/TaipeiSansTCBeta-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TaipeiSansTC';
+  src: url('/fonts/TaipeiSansTCBeta-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'YakuHanJP';
+  src: url('/fonts/YakuHanJP-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Redhat';
+  src: url('/fonts/redhat-medium.woff2') format('woff2'),
+       url('/fonts/redhat-medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────────
+   CSS Custom Properties
+───────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --color-bg-base:        #0a0a0a;
+  --color-bg-surface:     #141414;
+  --color-bg-elevated:    #1e1e1e;
+  --color-bg-overlay:     rgba(10, 10, 10, 0.88);
+
+  /* Taiwan palette */
+  --color-jade:           #3d7a6e;
+  --color-jade-light:     #5aada0;
+  --color-jade-dim:       #2a5a51;
+  --color-ocean:          #1e4d6b;
+  --color-ocean-light:    #2e7ca8;
+  --color-amber:          #c8933a;
+  --color-amber-light:    #e8b84b;
+  --color-volcanic:       #2a1a0e;
+
+  /* Text */
+  --color-text-primary:   #f5f2ee;
+  --color-text-secondary: #cbc6bf;
+  --color-text-dim:       #9e9892;
+  --color-text-code:      #7ed9c8;
+
+  /* Borders */
+  --color-border:         rgba(61, 122, 110, 0.25);
+  --color-border-strong:  rgba(61, 122, 110, 0.55);
+
+  /* Vertical tab animation vars — used by vertical-tabs.css */
+  --primary:              #0a0a0a;
+  --secondary:            #f0ede8;
+  --border:               1px solid rgba(61, 122, 110, 0.35);
+
+  /* Easing — preserved exactly from original */
+  --ease:                 cubic-bezier(0.255, 0.655, 0.02, 0.995);
+  --transition-width:     width 0.64s var(--ease);
+  --transition-opacity:   opacity 1.2s var(--ease);
+  --transition-transform: transform 1.2s var(--ease);
+}
+
+/* ─────────────────────────────────────────────
+   CSS Reset
+───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: 'TaipeiSansTC', 'YakuHanJP', system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+img, video {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ol, ul {
+  list-style: none;
+}
+
+/* ─────────────────────────────────────────────
+   Base Typography
+───────────────────────────────────────────── */
+.font-mono-display {
+  font-family: 'Redhat', 'JetBrains Mono', monospace;
+}
+.font-cjk-serif {
+  font-family: 'GenYoMin2TW', 'Noto Serif TC', serif;
+}
+.font-cjk-sans {
+  font-family: 'TaipeiSansTC', 'YakuHanJP', system-ui, sans-serif;
+}
+
+/* ─────────────────────────────────────────────
+   Layout Utilities
+───────────────────────────────────────────── */
+.container-site {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─────────────────────────────────────────────
+   Navigation
+───────────────────────────────────────────── */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: var(--color-border) solid 1px;
+  background: var(--color-bg-overlay);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.site-nav__logo {
+  font-family: 'Redhat', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-jade-light);
+}
+.site-nav__links {
+  display: flex;
+  gap: 2rem;
+}
+.site-nav__link {
+  font-family: 'Redhat', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  transition: color 0.2s;
+}
+.site-nav__link:hover,
+.site-nav__link[aria-current="page"] {
+  color: var(--color-jade-light);
+}
+.site-nav__link[aria-current="page"] {
+  border-bottom: 1px solid var(--color-jade);
+}
+@media (max-width: 640px) {
+  .site-nav__links {
+    gap: 1rem;
+  }
+  .site-nav__link {
+    font-size: 0.65rem;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Page Shell
+───────────────────────────────────────────── */
+.page-shell {
+  padding-top: 4rem; /* offset for fixed nav */
+}
+
+/* ─────────────────────────────────────────────
+   Terminal Window Component
+───────────────────────────────────────────── */
+.terminal-window {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.terminal-window__bar {
+  background: var(--color-bg-elevated);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.terminal-window__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.terminal-window__dot--red   { background: #ff5f57; }
+.terminal-window__dot--amber { background: var(--color-amber); }
+.terminal-window__dot--green { background: var(--color-jade-light); }
+.terminal-window__title {
+  margin-left: 0.5rem;
+  font-family: 'Redhat', monospace;
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.08em;
+}
+.terminal-window__body {
+  padding: 1.25rem 1.5rem;
+  font-family: 'Redhat', monospace;
+  font-size: 0.85rem;
+  line-height: 1.9;
+  color: var(--color-text-primary);
+}
+.terminal-window__prompt {
+  color: var(--color-jade-light);
+}
+.terminal-window__output {
+  color: var(--color-text-secondary);
+}
+.terminal-window__value {
+  color: var(--color-text-code);
+}
+
+/* ─────────────────────────────────────────────
+   Section Header Utility
+───────────────────────────────────────────── */
+.section-label {
+  font-family: 'Redhat', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-amber);
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-family: 'TaipeiSansTC', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+.section-title-zh {
+  font-family: 'GenYoMin2TW', serif;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: var(--color-text-secondary);
+  margin-top: 0.25rem;
+}
+.section-divider {
+  width: 2rem;
+  height: 1px;
+  background: var(--color-jade);
+  margin: 1rem 0 2rem;
+}
+
+/* ─────────────────────────────────────────────
+   Language Toggle (data-lang on <html>)
+   Default: EN shown, ZH hidden
+───────────────────────────────────────────── */
+.lang-en { display: revert; }
+.lang-zh { display: none; }
+
+[data-lang="zh"] .lang-en { display: none; }
+[data-lang="zh"] .lang-zh { display: revert; }
+
+/* Block-level lang elements */
+.lang-en-block { display: block; }
+.lang-zh-block { display: none; }
+
+[data-lang="zh"] .lang-en-block { display: none; }
+[data-lang="zh"] .lang-zh-block { display: block; }
+
+/* ─────────────────────────────────────────────
+   Jade Link Style
+───────────────────────────────────────────── */
+.jade-link {
+  color: var(--color-jade-light);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.jade-link:hover {
+  border-color: var(--color-jade-light);
+}
+
+/* ─────────────────────────────────────────────
+   Badge
+───────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+  font-family: 'Redhat', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.badge--jade {
+  background: rgba(61, 122, 110, 0.2);
+  color: var(--color-jade-light);
+  border: 1px solid var(--color-jade-dim);
+}
+.badge--amber {
+  background: rgba(200, 147, 58, 0.15);
+  color: var(--color-amber-light);
+  border: 1px solid rgba(200, 147, 58, 0.35);
+}

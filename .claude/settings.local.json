@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(js|html|css\\)$\")",
+      "WebFetch(domain:scholar.google.com)",
+      "WebSearch",
+      "WebFetch(domain:feiyuehchen.github.io)",
+      "Bash(npm install:*)",
+      "Read(//usr/local/Cellar/node/20.1.0/bin/**)",
+      "Bash(/usr/local/Cellar/node/20.1.0/bin/npm --version)",
+      "Read(//usr/local/lib/**)",
+      "Read(//usr/local/share/**)",
+      "Bash(/dev/null find:*)",
+      "Bash(/usr/local/Cellar/node/20.1.0/libexec/lib/node_modules/npm/bin/npm --version)",
+      "Bash(bun --version)",
+      "Bash(~/.nvm/versions/node/v25.3.0/bin/npm --version)",
+      "Bash(~/.nvm/versions/node/v25.3.0/bin/node --version)",
+      "Bash(~/.nvm/versions/node/v25.3.0/bin/npm install:*)",
+      "Bash(~/.nvm/versions/node/v25.3.0/bin/npm run:*)",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(grep:*)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(sed -i '' \"s|  @import ''../styles/global.css'';||g\" \"$f\")",
+      "Bash(done)",
+      "Bash(curl:*)",
+      "WebFetch(domain:www.sinica.edu.tw)",
+      "WebFetch(domain:museum.sinica.edu.tw)",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:aclanthology.org)",
+      "Bash(ls -lh /Users/fychen/feiyuehchen.github.io/public/img/portrait*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

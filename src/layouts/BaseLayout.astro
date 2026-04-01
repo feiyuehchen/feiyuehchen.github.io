@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = '陳飛岳 Fei-Yueh Chen',
+  description = 'AI researcher at University of Rochester. Music AI, NLP, LLMs. Taiwan.',
+  ogImage = '/img/icon.jpg',
+} = Astro.props;
+
+const fullTitle = title === '陳飛岳 Fei-Yueh Chen'
+  ? title
+  : `${title} · 陳飛岳`;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <title>{fullTitle}</title>
+
+  <!-- Font preloads -->
+  <link rel="preload" href="/fonts/TaipeiSansTCBeta-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/TaipeiSansTCBeta-Bold.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/redhat-medium.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- GSAP — must load synchronously before any component scripts -->
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+
+  <!-- Google Analytics -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-JRCJH7Z3LW"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-JRCJH7Z3LW');
+  </script>
+</head>
+<body>
+  <slot />
+</body>
+</html>

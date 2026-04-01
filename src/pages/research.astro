@@ -1,0 +1,150 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PublicationCard from '../components/research/PublicationCard.astro';
+import DotGrid from '../components/ui/DotGrid.astro';
+import { getCollection } from 'astro:content';
+
+const papers = (await getCollection('research'))
+  .sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order)
+  .map((p) => ({ ...p.data, slug: p.slug }));
+---
+
+<PageLayout
+  title="Research · 研究"
+  description="Publications by Fei-Yueh Chen in Music AI, Speech, and NLP."
+  current="/research"
+>
+  <DotGrid opacity={0.04} />
+
+  <div class="container-site research-page">
+    <header class="research-header">
+      <p class="section-label">
+        <span class="lang-en">// Research</span>
+        <span class="lang-zh">// 研究</span>
+      </p>
+      <h1 class="section-title">
+        <span class="lang-en">Publications</span>
+        <span class="lang-zh">學術發表</span>
+      </h1>
+      <div class="section-divider"></div>
+      <a class="scholar-link jade-link" href="https://scholar.google.com/citations?user=xj6eWnkAAAAJ" target="_blank" rel="noopener">
+        Google Scholar →
+      </a>
+    </header>
+
+    <!-- Tag filter -->
+    <div class="tag-filter" role="group" aria-label="Filter by topic">
+      <button class="tag-btn tag-btn--active" data-filter="all">
+        <span class="lang-en">All</span><span class="lang-zh">全部</span>
+      </button>
+      <button class="tag-btn" data-filter="music-ai">
+        <span class="lang-en">Music AI</span><span class="lang-zh">音樂 AI</span>
+      </button>
+      <button class="tag-btn" data-filter="speech">
+        <span class="lang-en">Speech</span><span class="lang-zh">語音</span>
+      </button>
+      <button class="tag-btn" data-filter="nlp">
+        <span class="lang-en">NLP</span><span class="lang-zh">自然語言</span>
+      </button>
+    </div>
+
+    <!-- Publication list -->
+    <div class="pub-list" id="pub-list">
+      {papers.map((p) => (
+        <div class="pub-item" data-tags={p.tags.join(',')}>
+          <PublicationCard paper={p} />
+        </div>
+      ))}
+    </div>
+
+    <p class="pub-empty" id="pub-empty" hidden>
+      <span class="lang-en">No papers in this category.</span>
+      <span class="lang-zh">此分類暫無論文。</span>
+    </p>
+  </div>
+</PageLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
+  const items = document.querySelectorAll<HTMLElement>('.pub-item');
+  const empty = document.getElementById('pub-empty')!;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'all';
+
+      buttons.forEach((b) => b.classList.remove('tag-btn--active'));
+      btn.classList.add('tag-btn--active');
+
+      let visible = 0;
+      items.forEach((item) => {
+        const tags = (item.dataset.tags ?? '').split(',');
+        const show = filter === 'all' || tags.includes(filter);
+        item.hidden = !show;
+        if (show) visible++;
+      });
+
+      empty.hidden = visible > 0;
+    });
+  });
+</script>
+
+<style>
+  .research-page {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .research-header {
+    margin-bottom: 2rem;
+  }
+  .scholar-link {
+    font-family: 'Redhat', monospace;
+    font-size: 0.8rem;
+  }
+
+  /* ── Tag filter bar ── */
+  .tag-filter {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .tag-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-dim);
+    font-family: 'Redhat', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    padding: 0.35em 0.9em;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .tag-btn:hover {
+    color: var(--color-text-secondary);
+    border-color: var(--color-jade-dim);
+  }
+  .tag-btn--active {
+    color: var(--color-jade-light);
+    border-color: var(--color-jade);
+    background: rgba(61, 122, 110, 0.1);
+  }
+
+  /* ── Publication list ── */
+  .pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .pub-empty {
+    font-family: 'Redhat', monospace;
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    margin-top: 1rem;
+  }
+</style>

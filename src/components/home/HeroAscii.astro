@@ -1,0 +1,62 @@
+---
+// ASCII art for "FYC" — compact, works at most viewport widths
+// Falls back to plain text on mobile
+---
+
+<div class="hero-ascii-wrap">
+  <pre class="hero-ascii" aria-hidden="true">
+ ███████╗██╗   ██╗ ██████╗
+ ██╔════╝╚██╗ ██╔╝██╔════╝
+ █████╗   ╚████╔╝ ██║
+ ██╔══╝    ╚██╔╝  ██║
+ ██║        ██║   ╚██████╗
+ ╚═╝        ╚═╝    ╚═════╝</pre>
+  <div class="hero-name-text" aria-hidden="true">
+    <span class="hero-name-en">Fei-Yueh Chen</span>
+    <span class="hero-name-zh">陳飛岳</span>
+  </div>
+</div>
+
+<style>
+.hero-ascii-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.hero-ascii {
+  font-family: 'Redhat', 'Fira Code', monospace;
+  font-size: clamp(0.5rem, 1.1vw, 0.85rem);
+  line-height: 1.25;
+  color: var(--color-jade-light);
+  letter-spacing: 0.02em;
+  white-space: pre;
+  text-shadow: 0 0 20px rgba(90, 173, 160, 0.4);
+  flex-shrink: 0;
+}
+.hero-name-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+.hero-name-en {
+  font-family: 'Redhat', monospace;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+.hero-name-zh {
+  font-family: 'GenYoMin2TW', serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.15em;
+}
+
+@media (max-width: 480px) {
+  .hero-ascii { display: none; }
+  .hero-name-en { font-size: 1.4rem; }
+  .hero-name-zh { font-size: 1.6rem; }
+}
+</style>

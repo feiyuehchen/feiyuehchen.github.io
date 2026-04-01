@@ -1,0 +1,110 @@
+---
+interface Props {
+  current?: string;
+}
+const { current } = Astro.props;
+
+const links = [
+  { href: '/',         en: 'Home',     zh: '首頁' },
+  { href: '/cv',       en: 'CV',       zh: '履歷' },
+  { href: '/research', en: 'Research', zh: '研究' },
+  { href: '/project',  en: 'Project',  zh: '作品' },
+  { href: '/arts',     en: 'Arts',     zh: '藝術' },
+  { href: '/contact',  en: 'Contact',  zh: '聯絡' },
+];
+---
+
+<nav class="site-nav">
+  <a class="site-nav__logo" href="/">
+    <span class="logo-en">FYC</span>
+    <span class="logo-zh">陳飛岳</span>
+  </a>
+
+  <ul class="site-nav__links">
+    {links.map(link => (
+      <li>
+        <a
+          class="site-nav__link"
+          href={link.href}
+          aria-current={current === link.href ? 'page' : undefined}
+        >
+          <span class="lang-en">{link.en}</span>
+          <span class="lang-zh">{link.zh}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+    <span class="lang-toggle__en">ZH</span>
+    <span class="lang-toggle__zh">EN</span>
+  </button>
+</nav>
+
+<script>
+  const html = document.documentElement;
+  const btn = document.getElementById('lang-toggle');
+
+  // Restore saved language preference
+  const saved = localStorage.getItem('lang') ?? 'en';
+  html.setAttribute('data-lang', saved);
+
+  btn?.addEventListener('click', () => {
+    const current = html.getAttribute('data-lang') ?? 'en';
+    const next = current === 'en' ? 'zh' : 'en';
+    html.setAttribute('data-lang', next);
+    localStorage.setItem('lang', next);
+  });
+</script>
+
+<style>
+/* ── Logo ── */
+.logo-en {
+  font-family: 'Redhat', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--color-jade-light);
+}
+.logo-zh {
+  font-family: 'TaipeiSansTC', sans-serif;
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  margin-left: 0.4em;
+}
+
+/* ── Language toggle button ── */
+.lang-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-dim);
+  font-family: 'Redhat', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 0.3em 0.6em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+.lang-toggle:hover {
+  color: var(--color-jade-light);
+  border-color: var(--color-jade-dim);
+}
+
+/* ── Show/hide per lang ── */
+/* Default: EN visible */
+:global([data-lang="en"]) .lang-en,
+:global([data-lang="zh"]) .lang-zh { display: inline; }
+:global([data-lang="en"]) .lang-zh,
+:global([data-lang="zh"]) .lang-en { display: none; }
+
+/* Toggle button label is the OTHER language */
+:global([data-lang="en"]) .lang-toggle__en { display: inline; }
+:global([data-lang="en"]) .lang-toggle__zh { display: none; }
+:global([data-lang="zh"]) .lang-toggle__zh { display: inline; }
+:global([data-lang="zh"]) .lang-toggle__en { display: none; }
+
+/* nav-zh on desktop */
+@media (max-width: 640px) {
+  .site-nav__links { gap: 0.7rem; }
+}
+</style>

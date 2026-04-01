@@ -1,0 +1,91 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import DotGrid from '../components/ui/DotGrid.astro';
+---
+
+<PageLayout
+  title="Contact · 聯絡"
+  description="Contact Fei-Yueh Chen, AI researcher."
+  current="/contact"
+>
+  <DotGrid opacity={0.04} />
+
+  <div class="container-site contact-page">
+    <header>
+      <p class="section-label">
+        <span class="lang-en">// Contact</span>
+        <span class="lang-zh">// 聯絡</span>
+      </p>
+      <h1 class="section-title">陳飛岳 Fei-Yueh Chen</h1>
+      <div class="section-divider"></div>
+    </header>
+
+    <div class="terminal-window contact-terminal">
+      <div class="terminal-window__bar">
+        <span class="terminal-window__dot terminal-window__dot--red"></span>
+        <span class="terminal-window__dot terminal-window__dot--amber"></span>
+        <span class="terminal-window__dot terminal-window__dot--green"></span>
+        <span class="terminal-window__title">contact.sh</span>
+      </div>
+      <div class="terminal-window__body">
+        <div class="contact-row">
+          <span class="contact-key">email</span>
+          <a class="contact-val jade-link" href="mailto:feiyuehchen@gmail.com">feiyuehchen@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-key">scholar</span>
+          <a class="contact-val jade-link" href="https://scholar.google.com/citations?user=xj6eWnkAAAAJ" target="_blank" rel="noopener">
+            Google Scholar →
+          </a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-key">linkedin</span>
+          <a class="contact-val jade-link" href="https://www.linkedin.com/in/feiyuehchen/" target="_blank" rel="noopener">
+            /in/feiyuehchen →
+          </a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-key">cv</span>
+          <a class="contact-val jade-link" href="/cv/cv_latest.pdf" target="_blank">
+            Download PDF →
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</PageLayout>
+
+<style>
+
+
+  .contact-page {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .contact-terminal {
+    max-width: 480px;
+    margin-bottom: 3rem;
+  }
+  .contact-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+  }
+  .contact-key {
+    font-family: 'Redhat', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--color-amber);
+    min-width: 70px;
+    text-transform: uppercase;
+  }
+  .contact-val {
+    font-family: 'Redhat', monospace;
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+  }
+</style>

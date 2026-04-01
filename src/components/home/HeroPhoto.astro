@@ -1,0 +1,145 @@
+---
+// Portrait card — ASCII default, hover reveals real photo
+---
+
+<div class="hero-photo">
+  <div class="hero-photo__label-top">
+    <span class="label-num">01</span>
+    <span class="label-line"></span>
+    <span class="label-tag">PORTRAIT</span>
+  </div>
+
+  <div class="hero-photo__frame" id="photo-frame">
+    <img
+      class="hero-photo__img hero-photo__img--real"
+      src="/img/portrait.jpg"
+      alt="Fei-Yueh Chen"
+      loading="eager"
+    />
+    <img
+      class="hero-photo__img hero-photo__img--ascii"
+      src="/img/portrait-ascii.png"
+      alt="Fei-Yueh Chen — ASCII"
+      loading="eager"
+    />
+    <div class="hero-photo__mode-badge" id="mode-badge">ASCII</div>
+  </div>
+
+  <div class="hero-photo__label-bot">
+    <span class="label-line"></span>
+    <span class="label-loc lang-en">Photographed in Yilan, Taiwan</span>
+    <span class="label-loc lang-zh">攝於宜蘭，台灣</span>
+  </div>
+
+</div>
+
+<script>
+  const frame = document.getElementById('photo-frame');
+  const badge = document.getElementById('mode-badge');
+  if (frame && badge) {
+    frame.addEventListener('mouseenter', () => {
+      frame.classList.add('reveal');
+      badge.textContent = 'RAW';
+    });
+    frame.addEventListener('mouseleave', () => {
+      frame.classList.remove('reveal');
+      badge.textContent = 'ASCII';
+    });
+  }
+</script>
+
+<style>
+.hero-photo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+/* ── Top label bar ── */
+.hero-photo__label-top,
+.hero-photo__label-bot {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: 'Redhat', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+.label-num {
+  color: var(--color-jade-dim);
+  flex-shrink: 0;
+}
+.label-tag,
+.label-loc {
+  flex-shrink: 0;
+  color: var(--color-text-dim);
+}
+.label-name {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.7rem;
+}
+.label-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ── Photo frame ── */
+.hero-photo__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  cursor: crosshair;
+}
+
+.hero-photo__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* ASCII on top, fades out on hover */
+.hero-photo__img--ascii {
+  z-index: 2;
+  transition: opacity 0.7s ease;
+}
+.hero-photo__img--real {
+  z-index: 1;
+  filter: brightness(0.85) contrast(1.05);
+}
+
+.hero-photo__frame.reveal .hero-photo__img--ascii {
+  opacity: 0;
+}
+
+/* ── Mode badge ── */
+.hero-photo__mode-badge {
+  position: absolute;
+  bottom: 0.9rem;
+  right: 0.9rem;
+  z-index: 10;
+  font-family: 'Redhat', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--color-jade-light);
+  border: 1px solid var(--color-jade-dim);
+  padding: 0.2em 0.6em;
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  transition: color 0.3s;
+}
+.hero-photo__frame.reveal .hero-photo__mode-badge {
+  color: var(--color-amber);
+  border-color: var(--color-amber);
+}
+</style>

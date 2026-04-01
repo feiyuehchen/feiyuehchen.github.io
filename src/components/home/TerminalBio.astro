@@ -1,0 +1,93 @@
+---
+// Static terminal window — bilingual bio in monospace
+---
+
+<div class="terminal-window terminal-bio">
+  <div class="terminal-window__bar">
+    <span class="terminal-window__dot terminal-window__dot--red"></span>
+    <span class="terminal-window__dot terminal-window__dot--amber"></span>
+    <span class="terminal-window__dot terminal-window__dot--green"></span>
+    <span class="terminal-window__title">fei-yueh@ur ~ %</span>
+  </div>
+  <div class="terminal-window__body">
+    <div class="t-line">
+      <span class="terminal-window__prompt">$ </span>
+      <span class="terminal-window__output lang-en">whoami</span>
+      <span class="terminal-window__output lang-zh">我是誰</span>
+    </div>
+    <div class="t-line t-val">
+      <span class="lang-en-block">AI researcher · University of Rochester (ECE + Computational Linguistics)</span>
+      <span class="lang-zh-block">AI 研究者・羅徹斯特大學（電機 + 計算語言學）</span>
+    </div>
+
+    <div class="t-line t-gap">
+      <span class="terminal-window__prompt">$ </span>
+      <span class="terminal-window__output lang-en">cat affiliations</span>
+      <span class="terminal-window__output lang-zh">cat 研究單位</span>
+    </div>
+    <div class="t-line t-val">
+      AIR Lab (Music AI) &nbsp;·&nbsp; Smule Inc &nbsp;·&nbsp; CCL Lab &nbsp;·&nbsp; Academia Sinica
+    </div>
+
+    <div class="t-line t-gap">
+      <span class="terminal-window__prompt">$ </span>
+      <span class="terminal-window__output lang-en">cat awards</span>
+      <span class="terminal-window__output lang-zh">cat 獎項</span>
+    </div>
+    <div class="t-line t-val">
+      <span class="lang-en-block">NeurIPS 2025 Best Paper · Taiwan Future Tech Award 2023</span>
+      <span class="lang-zh-block">NeurIPS 2025 最佳論文獎 · 台灣未來科技獎 2023</span>
+    </div>
+
+    <div class="t-line t-gap">
+      <span class="terminal-window__prompt">$ </span>
+      <span class="terminal-window__output lang-en">cat interests</span>
+      <span class="terminal-window__output lang-zh">cat 研究興趣</span>
+    </div>
+    <div class="t-line t-val">
+      <span class="lang-en-block">Music generation · Vocal AI · LLMs · Speech · Spatial audio</span>
+      <span class="lang-zh-block">音樂生成 · 歌聲 AI · 大型語言模型 · 語音 · 空間音訊</span>
+    </div>
+
+    <div class="t-line t-gap t-cursor">
+      <span class="terminal-window__prompt">$ </span>
+      <span class="cursor-blink">▋</span>
+    </div>
+  </div>
+</div>
+
+<style>
+.terminal-bio {
+  max-width: 600px;
+}
+.t-line {
+  font-family: 'Redhat', monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+.t-val {
+  color: var(--color-text-code);
+  padding-left: 1.2rem;
+}
+.t-gap {
+  margin-top: 0.7rem;
+}
+.t-zh {
+  font-family: 'GenYoMin2TW', serif;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.9;
+}
+.t-cursor {
+  margin-top: 0.7rem;
+}
+.cursor-blink {
+  color: var(--color-jade-light);
+  animation: blink 1.1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+</style>

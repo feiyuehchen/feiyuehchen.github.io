@@ -1,0 +1,302 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import DotGrid from '../components/ui/DotGrid.astro';
+---
+
+<PageLayout
+  title="CV · 履歷"
+  description="Curriculum vitae of Fei-Yueh Chen, AI researcher at University of Rochester."
+  current="/cv"
+>
+  <DotGrid opacity={0.04} />
+
+  <div class="container-site cv-page">
+    <header class="cv-header">
+      <p class="section-label">
+        <span class="lang-en">// Curriculum Vitae</span>
+        <span class="lang-zh">// 履歷</span>
+      </p>
+      <h1 class="section-title">陳飛岳 Fei-Yueh Chen</h1>
+      <div class="cv-links">
+        <a class="jade-link" href="/cv/cv_latest.pdf" target="_blank">Download PDF →</a>
+        <span class="cv-links-sep">·</span>
+        <a class="jade-link" href="https://scholar.google.com/citations?user=xj6eWnkAAAAJ" target="_blank" rel="noopener">Google Scholar →</a>
+        <span class="cv-links-sep">·</span>
+        <a class="jade-link" href="https://www.linkedin.com/in/feiyuehchen/" target="_blank" rel="noopener">LinkedIn →</a>
+      </div>
+      <div class="section-divider"></div>
+    </header>
+
+    <!-- Education -->
+    <section class="cv-section">
+      <h2 class="cv-section__title"><span class="lang-en">Education</span><span class="lang-zh">學歷</span></h2>
+      <ul class="cv-list">
+        <li class="cv-entry">
+          <div class="cv-entry__head">
+            <span class="cv-entry__place">University of Rochester</span>
+            <span class="cv-entry__date">Aug 2024 – May 2026</span>
+          </div>
+          <p class="cv-entry__role">M.S. in Electrical Engineering &amp; M.S. in Computational Linguistics (Dual Degree)</p>
+          <p class="cv-entry__detail">Rochester, New York</p>
+        </li>
+        <li class="cv-entry">
+          <div class="cv-entry__head">
+            <span class="cv-entry__place">National Taiwan University</span>
+            <span class="cv-entry__date">Sep 2017 – Jun 2022</span>
+          </div>
+          <p class="cv-entry__role">B.A. in Economics, Minor in Mathematics</p>
+          <p class="cv-entry__detail">Taipei, Taiwan &nbsp;·&nbsp; Dean's List Award (2019)</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Industry -->
+    <section class="cv-section">
+      <h2 class="cv-section__title"><span class="lang-en">Industry</span><span class="lang-zh">業界經歷</span></h2>
+      <ul class="cv-list">
+        <li class="cv-entry">
+          <div class="cv-entry__head">
+            <span class="cv-entry__place">Smule Inc.</span>
+            <span class="cv-entry__date">May 2025 – Dec 2025</span>
+          </div>
+          <p class="cv-entry__role">Research Intern &nbsp;·&nbsp; Remote, USA</p>
+          <p class="cv-entry__detail">Advisor: Yongyi Zang</p>
+          <ul class="cv-entry__bullets">
+            <li>Contributed to the dataset and evaluation pipeline for Smule Renaissance Small (SRS), a 10.4M-parameter vocal restoration model achieving 10.5× real-time inference on iPhone 12 CPU at 48 kHz</li>
+            <li>Contributed to StylePitcher: rectified flow matching-based pitch curve generator for singing voice synthesis — <strong class="award-text">NeurIPS 2025 Workshop Best Paper Award</strong></li>
+            <li>Trained HuBERT-based self-supervised encoders and distilled ConvNeXt-based speech encoders for on-device singing voice applications</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Research -->
+    <section class="cv-section">
+      <h2 class="cv-section__title"><span class="lang-en">Research</span><span class="lang-zh">研究經歷</span></h2>
+      <ul class="cv-list">
+        <li class="cv-entry">
+          <div class="cv-entry__head">
+            <span class="cv-entry__place">AIR Lab, University of Rochester</span>
+            <span class="cv-entry__date">Aug 2024 – Present</span>
+          </div>
+          <p class="cv-entry__role">Graduate Research Student</p>
+          <p class="cv-entry__detail">Advisor: Prof. Zhiyao Duan</p>
+          <ul class="cv-entry__bullets">
+            <li>Co-developed MusicSem: 32K-pair language-audio dataset from Reddit with 5-category semantic taxonomy (NeurIPS 2025 Workshop)</li>
+            <li>Developing a hierarchical method for symbolic music generation combining autoregressive and diffusion models</li>
+            <li>Evaluated multilingual ASR (mHuBERT-147, XLS-R) for Yoruba and Uneme; extended Feature Error Rate with tone-aware TER (EACL 2026 AfricaNLP)</li>
+          </ul>
+        </li>
+        <li class="cv-entry">
+          <div class="cv-entry__head">
+            <span class="cv-entry__place">CCL Lab, National Taiwan University</span>
+            <span class="cv-entry__date">Jun 2024 – Aug 2024</span>
+          </div>
+          <p class="cv-entry__role">Research Intern</p>
+          <p class="cv-entry__detail">Advisors: Prof. Kuan-Ming Chen, Prof. Patrick C.-C. Huang</p>
+          <ul class="cv-entry__bullets">
+            <li>Built LLM pipeline for structured feature extraction from Mandarin court verdicts, enabling large-scale empirical legal analysis</li>
+            <li>Co-developing TW-LegalBench: 16K+ MCQs, 117 essay questions, 14K+ criminal judgment prediction instances (under review, ICAIL 2026)</li>
+          </ul>
+        </li>
+        <li class="cv-entry">
+          <div class="cv-entry__head">
+            <span class="cv-entry__place">NLPSA Lab, Academia Sinica</span>
+            <span class="cv-entry__date">Sep 2022 – Jun 2024</span>
+          </div>
+          <p class="cv-entry__role">Research Assistant</p>
+          <p class="cv-entry__detail">Advisor: Prof. Lun-Wei Ku</p>
+          <ul class="cv-entry__bullets">
+            <li>Led development of Omiyage: LLM-powered multimodal interactive art system — <strong class="award-text">Taiwan Future Tech Award 2023</strong>. Deployed across 4 public exhibitions</li>
+          </ul>
+        </li>
+        <li class="cv-entry">
+          <div class="cv-entry__head">
+            <span class="cv-entry__place">Music AI Lab, Academia Sinica</span>
+            <span class="cv-entry__date">Sep 2021 – Aug 2022</span>
+          </div>
+          <p class="cv-entry__role">Research Assistant</p>
+          <p class="cv-entry__detail">Advisor: Prof. Yi-Hsuan Yang</p>
+          <ul class="cv-entry__bullets">
+            <li>Proposed novel MIDI tokenization for transformer-based symbolic music generation enabling joint lyrics-melody generation in a single autoregressive pass</li>
+            <li>Improved lyric rhyming fluency via 2-stage generation with phoneme-level tone and vowel constraints</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Skills -->
+    <section class="cv-section">
+      <h2 class="cv-section__title"><span class="lang-en">Skills</span><span class="lang-zh">技術</span></h2>
+      <div class="cv-skills">
+        <div class="cv-skill-row">
+          <span class="cv-skill-label">Technical</span>
+          <span class="cv-skill-val">Python · PyTorch · HuggingFace Transformers · Librosa · Miditok</span>
+        </div>
+        <div class="cv-skill-row">
+          <span class="cv-skill-label">Languages</span>
+          <span class="cv-skill-val">Mandarin (native) · English (fluent)</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</PageLayout>
+
+<style>
+
+
+  .cv-page {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .cv-header {
+    margin-bottom: 2rem;
+  }
+  .cv-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+    font-family: 'Redhat', monospace;
+    font-size: 0.8rem;
+  }
+  .cv-links-sep {
+    color: var(--color-text-dim);
+  }
+
+  .cv-section {
+    margin-bottom: 2.5rem;
+  }
+  .cv-section__title {
+    font-family: 'TaipeiSansTC', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-jade-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .cv-section__title-zh {
+    font-family: 'GenYoMin2TW', serif;
+    font-size: 0.85rem;
+    text-transform: none;
+    letter-spacing: 0.05em;
+    color: var(--color-text-dim);
+  }
+
+  .cv-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .cv-entry {
+    border-left: 2px solid var(--color-jade-dim);
+    padding-left: 1rem;
+  }
+  .cv-entry__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  .cv-entry__place {
+    font-family: 'TaipeiSansTC', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+  }
+  .cv-entry__date {
+    font-family: 'Redhat', monospace;
+    font-size: 0.7rem;
+    color: var(--color-amber);
+    white-space: nowrap;
+  }
+  .cv-entry__role {
+    font-family: 'TaipeiSansTC', sans-serif;
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.1rem;
+  }
+  .cv-entry__detail {
+    font-family: 'Redhat', monospace;
+    font-size: 0.72rem;
+    color: var(--color-text-dim);
+    margin-bottom: 0.5rem;
+  }
+  .cv-entry__bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .cv-entry__bullets li {
+    font-family: 'GenYoMin2TW', serif;
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .cv-entry__bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--color-jade-dim);
+  }
+  .award-text {
+    color: var(--color-amber-light);
+    font-weight: normal;
+  }
+
+  .cv-skills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .cv-skill-row {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  .cv-skill-label {
+    font-family: 'Redhat', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    min-width: 80px;
+  }
+  .cv-skill-val {
+    font-family: 'Redhat', monospace;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+  }
+
+  .cv-extra {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .cv-extra li {
+    font-family: 'GenYoMin2TW', serif;
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .cv-extra li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--color-jade-dim);
+  }
+</style>

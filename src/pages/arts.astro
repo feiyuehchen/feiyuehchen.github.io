@@ -1,0 +1,218 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PhotoGrid from '../components/arts/PhotoGrid.astro';
+import DotGrid from '../components/ui/DotGrid.astro';
+
+const photos = [
+  { src: '/img/photos/1.jpg',     alt: 'Photograph 1' },
+  { src: '/img/photos/2.jpg',     alt: 'Photograph 2' },
+  { src: '/img/photos/3.jpg',     alt: 'Photograph 3' },
+  { src: '/img/photos/4.jpg',     alt: 'Photograph 4' },
+  { src: '/img/photos/5.jpg',     alt: 'Photograph 5' },
+  { src: '/img/photos/6.jpg',     alt: 'Photograph 6' },
+  { src: '/img/photos/7.jpg',     alt: 'Photograph 7' },
+  { src: '/img/photos/8.jpg',     alt: 'Photograph 8' },
+  { src: '/img/photos/9.jpg',     alt: 'Photograph 9' },
+  { src: '/img/photos/10.jpg',    alt: 'Photograph 10' },
+  { src: '/img/photos/film-01.jpg', alt: 'Film photograph' },
+  { src: '/img/photos/film-02.jpg', alt: 'Film photograph' },
+];
+
+const songs = [
+  {
+    title: 'School Days With The Dumbo Bird',
+    titleZh: '和大笨鳥一起上學',
+    desc: 'NTU graduation song (2021)',
+    descZh: '台灣大學畢業歌曲',
+    href: 'https://www.youtube.com/watch?v=MiKru7KOaHk',
+  },
+];
+---
+
+<PageLayout
+  title="Arts · 藝術"
+  description="Photography and music by Fei-Yueh Chen."
+  current="/arts"
+>
+  <DotGrid opacity={0.04} />
+
+  <div class="container-site arts-page">
+
+    <!-- Tab toggle -->
+    <div class="arts-tabs" role="tablist">
+      <button class="arts-tab arts-tab--active" id="tab-photo" role="tab" aria-controls="panel-photo" aria-selected="true">
+        Photography <span class="arts-tab-zh">攝影</span>
+      </button>
+      <button class="arts-tab" id="tab-music" role="tab" aria-controls="panel-music" aria-selected="false">
+        Music <span class="arts-tab-zh">音樂</span>
+      </button>
+    </div>
+
+    <!-- Photography panel -->
+    <div id="panel-photo" role="tabpanel" aria-labelledby="tab-photo">
+      <PhotoGrid photos={photos} />
+    </div>
+
+    <!-- Music panel -->
+    <div id="panel-music" role="tabpanel" aria-labelledby="tab-music" hidden>
+      <div class="music-list">
+        {songs.map((song) => (
+          <div class="music-card">
+            <div class="music-card__info">
+              <p class="music-card__title">{song.title}</p>
+              <p class="music-card__title-zh">{song.titleZh}</p>
+              <p class="music-card__desc">{song.desc} &nbsp;·&nbsp; <span class="music-card__desc-zh">{song.descZh}</span></p>
+            </div>
+            {song.href ? (
+              <a class="music-card__link jade-link" href={song.href} target="_blank" rel="noopener">
+                Listen →
+              </a>
+            ) : (
+              <span class="music-card__soon">Link coming soon</span>
+            )}
+          </div>
+        ))}
+        <p class="music-note">
+          詞曲創作者。更多音樂作品持續更新中。<br/>
+          <span class="music-note-en">Songwriter. More music coming soon.</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</PageLayout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.arts-tab');
+  const panels: Record<string, HTMLElement | null> = {
+    'tab-photo': document.getElementById('panel-photo'),
+    'tab-music': document.getElementById('panel-music'),
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.classList.remove('arts-tab--active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('arts-tab--active');
+      tab.setAttribute('aria-selected', 'true');
+
+      Object.entries(panels).forEach(([id, panel]) => {
+        if (!panel) return;
+        if (id === tab.id) {
+          panel.removeAttribute('hidden');
+        } else {
+          panel.setAttribute('hidden', '');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+
+
+  .arts-page {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .arts-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .arts-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.6rem 1.25rem;
+    font-family: 'Redhat', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -1px;
+  }
+  .arts-tab:hover {
+    color: var(--color-text-secondary);
+  }
+  .arts-tab--active {
+    color: var(--color-jade-light);
+    border-bottom-color: var(--color-jade);
+  }
+  .arts-tab-zh {
+    font-family: 'TaipeiSansTC', sans-serif;
+    font-size: 0.7rem;
+    text-transform: none;
+    margin-left: 0.3em;
+    color: var(--color-text-dim);
+  }
+
+  /* Music */
+  .music-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+  }
+  .music-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-amber);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .music-card__title {
+    font-family: 'TaipeiSansTC', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+  }
+  .music-card__title-zh {
+    font-family: 'GenYoMin2TW', serif;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.2rem;
+  }
+  .music-card__desc {
+    font-family: 'Redhat', monospace;
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    margin-top: 0.3rem;
+  }
+  .music-card__desc-zh {
+    font-family: 'GenYoMin2TW', serif;
+  }
+  .music-card__link {
+    font-family: 'Redhat', monospace;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  .music-card__soon {
+    font-family: 'Redhat', monospace;
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    font-style: italic;
+  }
+  .music-note {
+    font-family: 'GenYoMin2TW', serif;
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    line-height: 1.8;
+    margin-top: 0.5rem;
+  }
+  .music-note-en {
+    font-family: 'Redhat', monospace;
+    font-size: 0.75rem;
+  }
+</style>

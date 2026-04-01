@@ -1,0 +1,163 @@
+---
+export interface Photo {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  photos: Photo[];
+}
+
+const { photos } = Astro.props;
+---
+
+<div class="photo-grid">
+  {photos.map((photo, i) => (
+    <button
+      class="photo-grid__item"
+      data-src={photo.src}
+      data-alt={photo.alt}
+      data-index={i}
+      aria-label={`Open photo: ${photo.alt}`}
+    >
+      <img
+        src={photo.src}
+        alt={photo.alt}
+        loading="lazy"
+        class="photo-grid__img"
+      />
+      {photo.caption && (
+        <span class="photo-grid__caption">{photo.caption}</span>
+      )}
+    </button>
+  ))}
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+  <img class="lightbox__img" id="lightbox-img" src="" alt="" />
+</div>
+
+<script>
+  const grid = document.querySelector('.photo-grid');
+  const lightbox = document.getElementById('lightbox')!;
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lbClose = document.getElementById('lightbox-close')!;
+
+  grid?.addEventListener('click', (e) => {
+    const btn = (e.target as Element).closest<HTMLButtonElement>('.photo-grid__item');
+    if (!btn) return;
+    lbImg.src = btn.dataset.src ?? '';
+    lbImg.alt = btn.dataset.alt ?? '';
+    lightbox.classList.add('lightbox--open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  });
+
+  const close = () => {
+    lightbox.classList.remove('lightbox--open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  lbClose.addEventListener('click', close);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+</script>
+
+<style>
+.photo-grid {
+  columns: 2;
+  column-gap: 0.75rem;
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .photo-grid { columns: 3; }
+}
+@media (min-width: 1200px) {
+  .photo-grid { columns: 4; }
+}
+
+.photo-grid__item {
+  break-inside: avoid;
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.photo-grid__item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(61, 122, 110, 0);
+  transition: background 0.25s;
+}
+.photo-grid__item:hover::after {
+  background: rgba(61, 122, 110, 0.15);
+}
+.photo-grid__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(20%);
+  transition: filter 0.3s;
+}
+.photo-grid__item:hover .photo-grid__img {
+  filter: grayscale(0%);
+}
+.photo-grid__caption {
+  display: block;
+  font-family: 'Redhat', monospace;
+  font-size: 0.65rem;
+  color: var(--color-text-dim);
+  padding: 0.3rem 0.1rem;
+  letter-spacing: 0.05em;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.95);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.lightbox--open {
+  display: flex;
+}
+.lightbox__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border: 1px solid var(--color-border);
+}
+.lightbox__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: 'Redhat', monospace;
+  transition: color 0.2s;
+}
+.lightbox__close:hover {
+  color: var(--color-text-primary);
+}
+</style>

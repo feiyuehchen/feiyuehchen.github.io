@@ -1,2 +1,36 @@
-others/
+# Astro build output
+dist/
+.astro/
+
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Archives
 *.zip
+
+# OS
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env
+.env
+.env.local
+.env.production
+
+# Windows zone identifiers
+*.Zone.Identifier
+
+# Python (legacy — app.py no longer used for dev)
+__pycache__/
+*.pyc
+*.pyo
+uploads/

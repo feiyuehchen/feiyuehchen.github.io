@@ -1,0 +1,209 @@
+---
+export interface TabItem {
+  title: string;
+  titleZh: string;
+  number: string;
+  caption: string;
+  captionZh: string;
+  image: string;
+  imageAlt: string;
+  href?: string;
+}
+
+interface Props {
+  items: TabItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="tab-app">
+  <div class="section">
+
+    <div class="section_header">
+      <div class="section_header_list">
+        <div class="section_header_list_item">
+          Projects <span class="section-zh">作品</span>
+        </div>
+        <div class="section_header_list_item --desktop"></div>
+        <div class="section_header_list_item --desktop"></div>
+        <div class="section_header_list_item proj-directory">
+          {items.map((item, i) => (
+            <button class="proj-dir-item" data-index={i}>
+              <span class="proj-dir-num">{item.number}</span>
+              <span class="proj-dir-title lang-en">{item.title}</span>
+              <span class="proj-dir-title lang-zh">{item.titleZh}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="section_container">
+      {items.map((item) => (
+        <div class="section_col" data-href={item.href}>
+          <div class="section_col_media">
+            <img
+              src={item.image}
+              alt={item.imageAlt}
+              class="section_col_image"
+              loading="lazy"
+            />
+          </div>
+          <div class="section_col_caption --desktop">
+            <span>{item.caption}</span>
+            <span class="zh">{item.captionZh}</span>
+          </div>
+          <div class="section_col_title">
+            <h2>{item.title}</h2>
+            <p class="zh-sub">{item.titleZh}</p>
+            {item.href && (
+              <a
+                class="proj-link-box"
+                href={item.href}
+                target="_blank"
+                rel="noopener"
+                onclick="event.stopPropagation()"
+              >
+                <span class="lang-en">Visit Project →</span>
+                <span class="lang-zh">查看作品 →</span>
+              </a>
+            )}
+            <p class="--mobile">了解更多 &rarr;</p>
+          </div>
+          <div class="section_col_number">
+            <h1>{item.number}</h1>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Vertical tab hover expand animation
+  const section = document.querySelector('.section');
+  if (section) {
+    const cols = section.querySelectorAll<HTMLElement>('.section_col');
+    const isDesktop = window.matchMedia('(min-width: 768px)');
+
+    const init = () => {
+      if (!isDesktop.matches) return;
+      cols[0]?.classList.add('active');
+      cols.forEach((col) => {
+        col.addEventListener('mouseenter', () => {
+          cols.forEach((el) => el.classList.remove('active'));
+          col.classList.add('active');
+        });
+        // Navigate on click if href set
+        col.addEventListener('click', () => {
+          const href = col.dataset.href;
+          if (href) window.location.href = href;
+        });
+      });
+    };
+
+    init();
+    isDesktop.addEventListener('change', init);
+
+    // Directory item click → activate corresponding tab
+    const dirItems = document.querySelectorAll<HTMLButtonElement>('.proj-dir-item');
+    dirItems.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(btn.dataset.index ?? '0', 10);
+        cols.forEach((el) => el.classList.remove('active'));
+        cols[idx]?.classList.add('active');
+      });
+    });
+  }
+</script>
+
+<style is:global>
+  @import "../../styles/vertical-tabs.css";
+</style>
+
+<style>
+  .section-zh {
+    font-family: 'GenYoMin2TW', serif;
+    font-size: 0.8em;
+    color: var(--color-text-secondary);
+    margin-left: 0.5em;
+  }
+  .zh-sub {
+    font-family: 'GenYoMin2TW', serif;
+    font-size: 2rem;
+    color: var(--color-text-secondary);
+  }
+</style>
+
+<style is:global>
+  .proj-directory {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 0.6rem !important;
+    padding: 1.5rem !important;
+    cursor: default !important;
+    overflow: hidden;
+  }
+  .proj-dir-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    transition: color 0.15s;
+    color: var(--color-text-dim);
+  }
+  .proj-dir-item:hover {
+    color: var(--color-jade-light);
+  }
+  .proj-dir-num {
+    font-family: 'Redhat', monospace;
+    font-size: 0.9rem;
+    color: var(--color-jade-dim);
+    min-width: 1.2rem;
+    flex-shrink: 0;
+  }
+  .proj-dir-title {
+    font-family: 'Redhat', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ── Project link box ── */
+  .proj-link-box {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--color-jade);
+    color: var(--color-jade-light);
+    font-family: 'Redhat', monospace;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.8rem 1.6rem;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, background 0.2s;
+    margin-top: 1.5rem;
+    white-space: nowrap;
+  }
+  .proj-link-box:hover {
+    background: rgba(61, 122, 110, 0.15);
+    color: var(--color-text-primary);
+  }
+  .section_col.active .proj-link-box {
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0.5s;
+  }
+</style>

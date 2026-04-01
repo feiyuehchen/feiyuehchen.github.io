@@ -1,0 +1,126 @@
+---
+export interface Paper {
+  title: string;
+  titleZh?: string;
+  venue: string;
+  year: number;
+  award?: string;
+  arxiv?: string;
+  pdf?: string;
+  authors: string[];
+  tags: string[];
+  slug: string;
+}
+
+interface Props {
+  paper: Paper;
+  selfName?: string;
+}
+
+const { paper, selfName = 'Fei-Yueh Chen' } = Astro.props;
+
+const authorList = paper.authors.map((a) =>
+  a === selfName ? `<strong>${a}</strong>` : a
+).join(', ');
+---
+
+<article class="pub-card">
+  <div class="pub-card__meta">
+    <span class="pub-card__venue badge badge--amber">{paper.venue}</span>
+    <span class="pub-card__year">{paper.year}</span>
+    {paper.award && (
+      <span class="pub-card__award badge badge--jade">🏆 {paper.award}</span>
+    )}
+  </div>
+
+  <h3 class="pub-card__title">{paper.title}</h3>
+  {paper.titleZh && (
+    <p class="pub-card__title-zh">{paper.titleZh}</p>
+  )}
+
+  <p class="pub-card__authors" set:html={authorList} />
+
+  <div class="pub-card__links">
+    {paper.arxiv && (
+      <a class="pub-card__link jade-link" href={paper.arxiv} target="_blank" rel="noopener">
+        arXiv →
+      </a>
+    )}
+    {paper.pdf && (
+      <a class="pub-card__link jade-link" href={paper.pdf} target="_blank" rel="noopener">
+        PDF →
+      </a>
+    )}
+  </div>
+
+</article>
+
+<style>
+.pub-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-jade-dim);
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
+}
+.pub-card:hover {
+  border-left-color: var(--color-jade);
+}
+.pub-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.7rem;
+}
+.pub-card__year {
+  font-family: 'Redhat', monospace;
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+}
+.pub-card__title {
+  font-family: 'TaipeiSansTC', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+}
+.pub-card__title-zh {
+  font-family: 'GenYoMin2TW', serif;
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  margin-bottom: 0.5rem;
+}
+.pub-card__authors {
+  font-family: 'Redhat', monospace;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+.pub-card__authors strong {
+  color: var(--color-jade-light);
+}
+.pub-card__links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  font-family: 'Redhat', monospace;
+  font-size: 0.75rem;
+}
+.pub-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.pub-tag {
+  font-family: 'Redhat', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-dim);
+  border: 1px solid rgba(122, 117, 111, 0.3);
+  padding: 0.15em 0.5em;
+  border-radius: 2px;
+}
+</style>

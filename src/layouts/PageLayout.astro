@@ -1,0 +1,21 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteNav from '../components/layout/SiteNav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  current?: string;
+  fullscreen?: boolean;
+}
+
+const { title, description, ogImage, current, fullscreen = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+  <SiteNav current={current} />
+  <main class={fullscreen ? '' : 'page-shell'}>
+    <slot />
+  </main>
+</BaseLayout>

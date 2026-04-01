@@ -1,0 +1,170 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroAscii from '../components/home/HeroAscii.astro';
+import HeroPhoto from '../components/home/HeroPhoto.astro';
+import DotGrid from '../components/ui/DotGrid.astro';
+import ScanLine from '../components/ui/ScanLine.astro';
+---
+
+<PageLayout
+  title="陳飛岳 Fei-Yueh Chen"
+  current="/"
+  fullscreen={true}
+>
+  <DotGrid />
+  <ScanLine />
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__left">
+      <HeroAscii />
+      <p class="hero__tagline lang-en-block">
+        AI Researcher &nbsp;·&nbsp; Music & Audio &nbsp;·&nbsp; Deep Learning &nbsp;·&nbsp; Taipei & New York
+      </p>
+      <p class="hero__tagline lang-zh-block">音樂與音訊AI &nbsp;/&nbsp; 大型語言模型 &nbsp;/&nbsp; 自然語言與音訊處理</p>
+
+      <div class="hero__intro">
+        <p class="hero__intro-para lang-en-block">
+          Master's student at <a class="jade-link" href="https://labsites.rochester.edu/air/index.html">AIR Lab</a>,
+          University of Rochester, advised by
+          <a class="jade-link" href="https://hajim.rochester.edu/ece/sites/zduan/">Prof. Zhiyao Duan</a>.
+          I focus on Deep Learning Methods in audio and text domain, especially for music and audio.
+          Previously a research intern at <a class="jade-link" href="https://www.smule.com">Smule Inc.</a>,
+          and a research assistant at
+          <a class="jade-link" href="https://ccl-lab.github.io">CCL Lab (NTU)</a>,
+          <a class="jade-link" href="https://academiasinicanlplab.github.io">NLPSA</a>,
+          and <a class="jade-link" href="https://twmusicai.github.io">Music AI Lab</a> at Academia Sinica, Taiwan. Bachelor Degree from National Taiwan University.
+        </p>
+        <p class="hero__intro-para hero__intro-serif lang-zh-block">
+          就讀於羅徹斯特大學電機與計算語言學雙碩士，
+          指導教授為 <a class="jade-link" href="https://hajim.rochester.edu/ece/sites/zduan/">段志堯教授</a>。
+          研究興趣為音樂、音訊生成模型和自然語言處理。
+          曾任職於 <a class="jade-link" href="https://www.smule.com">Smule Inc.</a> 研究實習生，
+          以及中央研究院
+          <a class="jade-link" href="https://academiasinicanlplab.github.io">自然語言處理實驗室</a>
+          與<a class="jade-link" href="https://twmusicai.github.io">音樂人工智慧實驗室</a>研究助理。
+          <br/>國立台灣大學畢業。在聲音、語言與藝術的交界處工作。空餘時間喜歡寫歌、攝影。
+        </p>
+      </div>
+
+      <nav class="hero__nav">
+        <a class="hero__nav-link" href="/cv"><span class="lang-en">CV</span><span class="lang-zh">履歷</span></a>
+        <span class="hero__nav-sep">·</span>
+        <a class="hero__nav-link" href="/research"><span class="lang-en">Research</span><span class="lang-zh">研究</span></a>
+        <span class="hero__nav-sep">·</span>
+        <a class="hero__nav-link" href="/project"><span class="lang-en">Projects</span><span class="lang-zh">作品</span></a>
+        <span class="hero__nav-sep">·</span>
+        <a class="hero__nav-link" href="/arts"><span class="lang-en">Arts</span><span class="lang-zh">藝術</span></a>
+        <span class="hero__nav-sep">·</span>
+        <a class="hero__nav-link" href="/contact"><span class="lang-en">Contact</span><span class="lang-zh">聯絡</span></a>
+      </nav>
+    </div>
+
+    <div class="hero__right">
+      <HeroPhoto />
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+
+
+  .hero {
+    min-height: calc(100vh - 4rem);
+    padding: 5rem 2rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .hero__left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .hero__tagline {
+    font-family: 'Redhat', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+  .hero__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 560px;
+  }
+  .hero__intro-para {
+    font-family: 'TaipeiSansTC', sans-serif;
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+  }
+  .hero__intro-serif {
+    font-family: 'GenYoMin2TW', serif;
+    font-size: 0.83rem;
+    color: var(--color-text-secondary);
+    line-height: 1.9;
+  }
+  .hero__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .hero__nav-link {
+    font-family: 'Redhat', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-jade-light);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .hero__nav-link:hover {
+    border-color: var(--color-jade-light);
+  }
+  .hero__nav-sep {
+    color: var(--color-text-dim);
+    font-size: 0.75rem;
+  }
+  .hero__right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+  }
+
+  /* Terminal section below hero */
+  :global(.terminal-bio) {
+    max-width: 620px;
+    margin: 0 2rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .hero__right {
+      max-width: 260px;
+      margin: 0 auto;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero {
+      padding: 5rem 1.5rem 2rem;
+    }
+    :global(.terminal-bio) {
+      margin: 0 1.5rem 3rem;
+    }
+  }
+</style>
