@@ -1,19 +1,19 @@
-This is the personal page of Fei Yueh Chen(陳飛岳).
-If you clone this file, you could run a local server for my homepage by the command lines below
+# feiyuehchen.github.io
 
-```python
-# create environment
-conda create -n web python=3.12
-conda activate web
+Personal portfolio of Fei-Yueh Chen (陳飛岳) — AI researcher in Music AI, Speech, and NLP at the University of Rochester.
 
-# clone this repo and install packages
-git clone https://github.com/feiyuehchen/feiyuehchen.github.io.git
-cd feiyuehchen.github.io
-pip install -r requirements.txt
- 
-# start the page
-python app.py
+Built with [Astro 4](https://astro.build) + Tailwind CSS. Deployed via GitHub Actions to GitHub Pages.
+
+## Dev
+
+```bash
+npm install
+npm run dev      # localhost:4321
+npm run build    # build to dist/
+npm run preview  # preview dist/ locally
 ```
 
+## Font credits
 
-Font Source: https://github.com/ButTaiwan/genyo-font
+- [源様明朝 GenYoMin2](https://github.com/ButTaiwan/genyo-font)
+- [台北黑體 TaipeiSansTC](https://sites.google.com/view/jtfoundry/)
