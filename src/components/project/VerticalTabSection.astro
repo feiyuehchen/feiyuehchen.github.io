@@ -27,7 +27,7 @@ const { items } = Astro.props;
         </div>
         <div class="section_header_list_item --desktop"></div>
         <div class="section_header_list_item --desktop"></div>
-        <div class="section_header_list_item proj-directory">
+        <div class="section_header_list_item proj-directory --desktop">
           {items.map((item, i) => (
             <button class="proj-dir-item" data-index={i}>
               <span class="proj-dir-num">{item.number}</span>
@@ -69,7 +69,10 @@ const { items } = Astro.props;
                 <span class="lang-zh">查看作品 →</span>
               </a>
             )}
-            <p class="--mobile">了解更多 &rarr;</p>
+            {item.href
+              ? <a class="--mobile mobile-visit" href={item.href} target="_blank" rel="noopener" onclick="event.stopPropagation()">了解更多 →</a>
+              : <p class="--mobile">了解更多</p>
+            }
           </div>
           <div class="section_col_number">
             <h1>{item.number}</h1>
@@ -82,21 +85,19 @@ const { items } = Astro.props;
 </div>
 
 <script>
-  // Vertical tab hover expand animation
   const section = document.querySelector('.section');
   if (section) {
     const cols = section.querySelectorAll<HTMLElement>('.section_col');
     const isDesktop = window.matchMedia('(min-width: 768px)');
 
-    const init = () => {
-      if (!isDesktop.matches) return;
+    // Desktop: hover to expand, click to navigate
+    const initDesktop = () => {
       cols[0]?.classList.add('active');
       cols.forEach((col) => {
         col.addEventListener('mouseenter', () => {
           cols.forEach((el) => el.classList.remove('active'));
           col.classList.add('active');
         });
-        // Navigate on click if href set
         col.addEventListener('click', () => {
           const href = col.dataset.href;
           if (href) window.location.href = href;
@@ -104,12 +105,13 @@ const { items } = Astro.props;
       });
     };
 
-    init();
-    isDesktop.addEventListener('change', init);
+    if (isDesktop.matches) initDesktop();
+    isDesktop.addEventListener('change', (e) => {
+      if (e.matches) initDesktop();
+    });
 
-    // Directory item click → activate corresponding tab
-    const dirItems = document.querySelectorAll<HTMLButtonElement>('.proj-dir-item');
-    dirItems.forEach((btn) => {
+    // Directory item click → activate tab (desktop)
+    document.querySelectorAll<HTMLButtonElement>('.proj-dir-item').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const idx = parseInt(btn.dataset.index ?? '0', 10);
@@ -139,6 +141,7 @@ const { items } = Astro.props;
 </style>
 
 <style is:global>
+  /* ── Project directory (desktop only) ── */
   .proj-directory {
     display: flex !important;
     flex-direction: column !important;
@@ -160,9 +163,7 @@ const { items } = Astro.props;
     transition: color 0.15s;
     color: var(--color-text-dim);
   }
-  .proj-dir-item:hover {
-    color: var(--color-jade-light);
-  }
+  .proj-dir-item:hover { color: var(--color-jade-light); }
   .proj-dir-num {
     font-family: 'Redhat', monospace;
     font-size: 0.9rem;
@@ -179,7 +180,7 @@ const { items } = Astro.props;
     text-overflow: ellipsis;
   }
 
-  /* ── Project link box ── */
+  /* ── Project link box (desktop: fade in on active) ── */
   .proj-link-box {
     display: inline-flex;
     align-items: center;
@@ -205,5 +206,20 @@ const { items } = Astro.props;
     opacity: 1;
     pointer-events: auto;
     transition-delay: 0.5s;
+  }
+
+  /* ── Mobile visit link ── */
+  .mobile-visit {
+    font-family: 'Redhat', monospace;
+    font-size: 3rem;
+    color: var(--color-jade-light);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+  .mobile-visit:hover { color: var(--color-text-primary); }
+
+  /* ── Mobile adjustments ── */
+  @media (max-width: 768px) {
+    .proj-link-box { display: none; }
   }
 </style>

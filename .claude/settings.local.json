@@ -29,7 +29,12 @@
       "WebFetch(domain:arxiv.org)",
       "WebFetch(domain:aclanthology.org)",
       "Bash(ls -lh /Users/fychen/feiyuehchen.github.io/public/img/portrait*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh run:*)",
+      "WebFetch(domain:api.github.com)"
     ]
   }
 }

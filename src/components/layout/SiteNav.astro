@@ -14,13 +14,13 @@ const links = [
 ];
 ---
 
-<nav class="site-nav">
+<nav class="site-nav" id="site-nav">
   <a class="site-nav__logo" href="/">
     <span class="logo-en">FYC</span>
     <span class="logo-zh">陳飛岳</span>
   </a>
 
-  <ul class="site-nav__links">
+  <ul class="site-nav__links" id="nav-links">
     {links.map(link => (
       <li>
         <a
@@ -35,25 +35,47 @@ const links = [
     ))}
   </ul>
 
-  <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
-    <span class="lang-toggle__en">ZH</span>
-    <span class="lang-toggle__zh">EN</span>
-  </button>
+  <div class="site-nav__right">
+    <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+      <span class="lang-toggle__en">ZH</span>
+      <span class="lang-toggle__zh">EN</span>
+    </button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <script>
   const html = document.documentElement;
-  const btn = document.getElementById('lang-toggle');
+  const langBtn = document.getElementById('lang-toggle');
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks = document.getElementById('nav-links');
 
-  // Restore saved language preference
+  // Restore language
   const saved = localStorage.getItem('lang') ?? 'en';
   html.setAttribute('data-lang', saved);
 
-  btn?.addEventListener('click', () => {
-    const current = html.getAttribute('data-lang') ?? 'en';
-    const next = current === 'en' ? 'zh' : 'en';
+  langBtn?.addEventListener('click', () => {
+    const next = html.getAttribute('data-lang') === 'en' ? 'zh' : 'en';
     html.setAttribute('data-lang', next);
     localStorage.setItem('lang', next);
+  });
+
+  // Hamburger toggle
+  hamburger?.addEventListener('click', () => {
+    const open = navLinks?.classList.toggle('is-open');
+    hamburger.setAttribute('aria-expanded', String(open));
+    hamburger.classList.toggle('is-open', open ?? false);
+  });
+
+  // Close on link click (mobile nav)
+  navLinks?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('is-open');
+      hamburger?.classList.remove('is-open');
+      hamburger?.setAttribute('aria-expanded', 'false');
+    });
   });
 </script>
 
@@ -72,7 +94,14 @@ const links = [
   margin-left: 0.4em;
 }
 
-/* ── Language toggle button ── */
+/* ── Right side controls ── */
+.site-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ── Language toggle ── */
 .lang-toggle {
   background: none;
   border: 1px solid var(--color-border);
@@ -90,21 +119,71 @@ const links = [
   border-color: var(--color-jade-dim);
 }
 
-/* ── Show/hide per lang ── */
-/* Default: EN visible */
+/* ── Hamburger (hidden on desktop) ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  width: 28px;
+  height: 28px;
+}
+.nav-hamburger span {
+  display: block;
+  height: 1px;
+  background: var(--color-text-secondary);
+  transition: transform 0.2s, opacity 0.2s;
+  transform-origin: center;
+}
+.nav-hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ── Language show/hide ── */
 :global([data-lang="en"]) .lang-en,
 :global([data-lang="zh"]) .lang-zh { display: inline; }
 :global([data-lang="en"]) .lang-zh,
 :global([data-lang="zh"]) .lang-en { display: none; }
 
-/* Toggle button label is the OTHER language */
 :global([data-lang="en"]) .lang-toggle__en { display: inline; }
 :global([data-lang="en"]) .lang-toggle__zh { display: none; }
 :global([data-lang="zh"]) .lang-toggle__zh { display: inline; }
 :global([data-lang="zh"]) .lang-toggle__en { display: none; }
 
-/* nav-zh on desktop */
+/* ── Mobile nav ── */
 @media (max-width: 640px) {
-  .site-nav__links { gap: 0.7rem; }
+  .nav-hamburger { display: flex; }
+
+  .site-nav__links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--color-bg-overlay);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.5rem 0;
+  }
+  .site-nav__links.is-open { display: flex; }
+  .site-nav__links li { width: 100%; }
+  .site-nav__link {
+    display: block;
+    padding: 0.75rem 2rem;
+    font-size: 0.75rem;
+    border-bottom: none !important;
+  }
+  .site-nav__link[aria-current="page"] {
+    color: var(--color-jade-light);
+    border-left: 2px solid var(--color-jade);
+    padding-left: calc(2rem - 2px);
+  }
 }
 </style>

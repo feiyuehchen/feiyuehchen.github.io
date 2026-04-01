@@ -147,6 +147,11 @@ ol, ul {
   margin: 0 auto;
   padding: 0 1.5rem;
 }
+@media (max-width: 480px) {
+  .container-site {
+    padding: 0 1rem;
+  }
+}
 
 /* ─────────────────────────────────────────────
    Navigation

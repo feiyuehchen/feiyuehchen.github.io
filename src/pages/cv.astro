@@ -299,4 +299,18 @@ import DotGrid from '../components/ui/DotGrid.astro';
     left: 0;
     color: var(--color-jade-dim);
   }
+
+  @media (max-width: 600px) {
+    .cv-entry__head {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .cv-entry__date {
+      font-size: 0.68rem;
+    }
+    .cv-skill-row {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+  }
 </style>
