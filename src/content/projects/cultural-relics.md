@@ -7,6 +7,7 @@ captionZh: "讓國寶文物開口說話，2023 中研院 Open House"
 image: "/img/projects/cultural-relics-01.jpg"
 imageAlt: "Cultural relics interactive display at museum"
 href: "https://museum.sinica.edu.tw/en/events/209/"
+imagePosition: "center 65%"
 order: 2
 ---
 

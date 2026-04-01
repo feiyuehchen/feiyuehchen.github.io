@@ -8,6 +8,7 @@ export interface TabItem {
   image: string;
   imageAlt: string;
   href?: string;
+  imagePosition?: string;
 }
 
 interface Props {
@@ -47,6 +48,7 @@ const { items } = Astro.props;
               src={item.image}
               alt={item.imageAlt}
               class="section_col_image"
+              style={`object-position: ${item.imagePosition ?? 'center center'}`}
               loading="lazy"
             />
           </div>

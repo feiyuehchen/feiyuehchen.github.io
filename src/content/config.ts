@@ -27,6 +27,7 @@ const projects = defineCollection({
     image: z.string(),
     imageAlt: z.string(),
     href: z.string().optional(),
+    imagePosition: z.string().default('center center'),
     order: z.number().default(0),
   }),
 });
