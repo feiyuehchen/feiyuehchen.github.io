@@ -153,14 +153,14 @@ img.section_col_image {
 }
 .section_col_title h2 {
   font-family: 'Redhat', monospace;
-  font-size: 4rem;
+  font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--secondary);
 }
 .section_col_title .zh-sub {
   font-family: 'GenYoMin2TW', serif;
-  font-size: 2rem;
+  font-size: 1rem;
   color: var(--color-text-secondary);
 }
 
