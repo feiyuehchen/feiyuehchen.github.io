@@ -39,6 +39,11 @@ const fullTitle = title === '陳飛岳 Fei-Yueh Chen'
   <link rel="preload" href="/fonts/TaipeiSansTCBeta-Bold.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="preload" href="/fonts/redhat-medium.woff2" as="font" type="font/woff2" crossorigin />
 
+  <!-- Set language before paint to avoid flash -->
+  <script is:inline>
+    document.documentElement.setAttribute('data-lang', localStorage.getItem('lang') ?? 'en');
+  </script>
+
   <!-- GSAP — must load synchronously before any component scripts -->
   <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 

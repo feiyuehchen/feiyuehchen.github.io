@@ -27,12 +27,14 @@ const projects = (await getCollection('projects'))
 </PageLayout>
 
 <style is:global>
-  /* Push tab-app below the fixed site nav */
-  .tab-app {
-    padding-top: 4rem;
-    height: 100vh;
-  }
-  .section {
-    height: 100vh;
+  /* Desktop: push below fixed nav, full-screen */
+  @media (min-width: 769px) {
+    .tab-app {
+      padding-top: 4rem;
+      height: 100vh;
+    }
+    .section {
+      height: 100vh;
+    }
   }
 </style>

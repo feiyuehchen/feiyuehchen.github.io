@@ -174,57 +174,75 @@ img.section_col_image {
 /* ─── Mobile ───────────────────────────────── */
 @media screen and (max-width: 768px) {
   .tab-app {
-    font-size: calc(100vw / 768 * 10);
+    font-size: 16px;
     height: auto;
-    padding: 1.6rem;
+    padding: 0;
+    padding-top: 4rem; /* nav offset */
   }
   .section {
     height: 100%;
+    border: none;
   }
+
+  /* Hide header entirely — site-nav already shows current page */
+  .section_header { display: none; }
+
   .--desktop { display: none; }
   .--mobile  { display: block; }
 
-  .section_header_list_item:nth-child(2),
-  .section_header_list_item:nth-child(3) {
-    display: none;
-  }
-  .section_header_list_item:nth-child(1) {
-    flex: 1;
-    border-right: none;
-  }
+  /* Stack as full-width image cards */
   .section_container {
     flex-direction: column;
+    gap: 2px;
   }
   .section_col {
+    position: relative;
     width: 100%;
-    height: calc(25vh - 3.2rem);
+    height: 44vw;
+    min-height: 160px;
+    max-height: 260px;
     flex-direction: row;
     align-items: flex-end;
-    padding: 2rem;
+    padding: 1rem 1.25rem;
     border-right: none;
-    border-bottom: var(--border);
+    border-bottom: none;
+    overflow: hidden;
+    cursor: pointer;
   }
+
+  /* Image fills card */
   .section_col_media {
-    position: relative;
-    width: 15rem;
-    height: 20rem;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     opacity: 1;
-    flex: 0.75;
+    flex: unset;
   }
+  .section_col_media::after {
+    opacity: 0.55;
+  }
+
+  /* Title sits at bottom over image */
   .section_col_title {
+    position: relative;
+    z-index: 2;
     flex: 1;
     align-items: flex-start;
-    gap: 0.4rem;
+    gap: 0.25rem;
   }
   .section_col_title h2 {
-    font-size: 6rem;
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+    color: #f5f2ee;
     margin-bottom: 0;
   }
-  .section_col_number {
-    flex: 0.5;
-    text-align: right;
+  .section_col_title .zh-sub {
+    font-size: 0.85rem;
+    color: rgba(240,237,232,0.75);
   }
-  .section_col_number h1 {
-    font-size: 24rem;
-  }
+
+  /* Hide number and caption on mobile */
+  .section_col_number,
+  .section_col_caption { display: none; }
 }
